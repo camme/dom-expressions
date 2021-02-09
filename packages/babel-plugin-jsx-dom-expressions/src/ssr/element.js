@@ -319,6 +319,9 @@ function transformChildren(path, results) {
   const filteredChildren = filterChildren(path.get("children"), true);
   filteredChildren.forEach(node => {
     const child = transformNode(node);
+    if (!child) {
+      return null;
+    }
     appendToTemplate(results.template, child.template);
     results.templateValues.push.apply(results.templateValues, child.templateValues || []);
     if (child.exprs.length) {
